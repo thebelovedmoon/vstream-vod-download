@@ -1,6 +1,8 @@
 name: generating md5 hashes
 
 on:
+  push:
+    branches: ["clonethis"]
   release:
     types: [published]
 
