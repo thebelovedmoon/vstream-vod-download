@@ -44,7 +44,7 @@ installing these dependencies require that you know which operating system you'r
   - `sudo apt-get update` to update the repository files. you will need to enter your password if you have one.
   - `sudo apt-get -y install yt-dlp ffmpeg` to install the app and its dependency.
 - if you're installing the app directly from the repository:
-  - `curl -O https://github.com/yt-dlp/yt-dlp/releases/download/{LATESTVERSION}/yt-dlp` where `{LATESTVERSION}` refers to the latest release. for more info, check out the yt-dlp repository on GitHub.
+  - `wget https://github.com/yt-dlp/yt-dlp/releases/download/{LATESTVERSION}/yt-dlp` where `{LATESTVERSION}` refers to the latest release. for more info, check out the yt-dlp repository on GitHub.
   - `sudo apt-get update && sudo apt-get -y install ffmpeg` to install its dependency.
   - `chmod +x yt-dlp` to make the app executable.
 
