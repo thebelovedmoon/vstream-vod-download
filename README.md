@@ -1,12 +1,8 @@
-<span style="text-align: center;">
-
-<h1>VStream download scripts</h1>
+# VStream download scripts
 
 ![windows](https://img.shields.io/badge/tentative_on_Windows-9747ff?logo=windows&logoColor=fff)
 ![mac](https://img.shields.io/badge/tentative_on_Mac-f31f1f?logo=apple&logoColor=fff)
 ![linux](https://img.shields.io/badge/works_on_Linux%2FWSL-1476ff?logo=linux&logoColor=fff)
-
-</span>
 
 this is the repository reponsible for a one-stop download of scripts designated to efficiently download your VStream VODs!!
 
@@ -89,23 +85,7 @@ if you did this steps over on WSL (Windows Subsystem for Linux), you can also us
 
 _below is a sample video that will be replaced when the tutorial video is published._
 
-<iframe
-  class="ytembed"
-  src="https://www.youtube.com/embed/MNCjEx_yhCU"
-  frameborder="0"
-  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen>
-</iframe>
-
-<style>
-  .ytembed {
-    width: 500px;
-    max-width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    border-radius: 10px;
-  }
-</style>
+[![](https://i.ytimg.com/vi/MNCjEx_yhCU/hq720.jpg)](https://youtu.be/MNCjEx_yhCU)
 
 <details>
 
