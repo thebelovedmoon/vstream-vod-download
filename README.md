@@ -6,7 +6,7 @@
 
 this is the repository reponsible for a one-stop download of scripts designated to efficiently download your VStream VODs!!
 
-this repository has been as the VStream backend has no direct implementation of downloading the VODs from the website yet.
+this repository has been provisioned as the VStream backend has no direct implementation of downloading the VODs from the website yet.
 
 ## what this repository contains
 
