@@ -1,0 +1,19 @@
+name: generating md5 hashes
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: generating md5 hashes
+      uses: MCJack123/ghaction-Generate-Release-Hashes@v4
+      with:
+        hash-type: md5
+        file-name: md5_hash.txt
+    - name: upload md5 hashes to repository
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        path: md5_hash.txt
