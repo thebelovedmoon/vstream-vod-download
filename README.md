@@ -8,6 +8,17 @@ this is the repository reponsible for a one-stop download of scripts designated 
 
 this repository has been provisioned as the VStream backend has no direct implementation of downloading the VODs from the website yet.
 
+## table of contents
+
+1. [important information](#important-information)
+2. [installing dependencies](#installing-dependencies)
+3. [downloading VStream VODs](#downloading-vstream-vods)
+4. [MD5 hashes](#md5-hashes)
+
+# important information
+
+some things you need to know about this repository.
+
 ## what this repository contains
 
 we've provided the scripts that works on their designated operating systems:
@@ -24,9 +35,7 @@ the scripts depend on the following:
 
 refer to the section below on how to download these dependencies.
 
-<details>
-
-<summary><h1>installing dependencies</h1></summary>
+# installing dependencies
 
 installing these dependencies require that you know which operating system you're using.
 
@@ -48,11 +57,7 @@ installing these dependencies require that you know which operating system you'r
   - `sudo apt-get update && sudo apt-get -y install ffmpeg` to install its dependency.
   - `chmod +x yt-dlp` to make the app executable.
 
-</details>
-
-<details>
-
-<summary><h1>downloading VStream VODs</h1></summary>
+# downloading VStream VODs
 
 once you're done with the steps above, it's time for the main event: downloading your VODs!! follow the steps below:
 
@@ -79,22 +84,16 @@ if you did this steps over on WSL (Windows Subsystem for Linux), you can also us
   - to find out what your username is, launch `cmd` and type `whoami`. it will display your PC name and your username as `{PCNAME}\{USERNAME}`.
   - don't forget the last slash `/` as without it will cause your VOD to render as a single file, and overwrite if there are multiple files. this is caused when there are no existing directory in its parent. if you don't want the backslash, ensure that the intended directory is prepared beforehand.
 
-</details>
-
-# tutorial video
+## tutorial video
 
 _below is a sample video that will be replaced when the tutorial video is published._
 
 [![](https://i.ytimg.com/vi/MNCjEx_yhCU/hq720.jpg)](https://youtu.be/MNCjEx_yhCU)
 
-<details>
-
-<summary><h1>MD5 hashes</h1></summary>
+# MD5 hashes
 
 the MD5 hashes are provided for file integrity purposes to prevent you from downloading malware. for more info, check out these articles from [Autodesk](https://autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Checking-the-MD5-checksum-of-a-Downloaded-File.html) and [La De Du](https://ladedu.com/how-to-verify-a-md5-or-sha-checksum-on-windows-10).
 
 - `dl-vstream-apt.sh`: `e4715cd41b8f6793d7b4167355bc25e8`
 - `dl-vstream-selfupdate.sh`: `08ae25308df725bb0dcff927fd0dbf14`
 - `dl-vstream.bat`: `0480656fb227bfee49f5ba02b0bc797a`
-
-</details>
