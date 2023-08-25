@@ -1,7 +1,7 @@
 # VStream download scripts
 
-![windows](https://img.shields.io/badge/tentative_on_Windows-9747ff?logo=windows&logoColor=fff)
-![mac](https://img.shields.io/badge/tentative_on_Mac-f31f1f?logo=apple&logoColor=fff)
+![windows](https://img.shields.io/badge/testing_on_Windows-9747ff?logo=windows&logoColor=fff)
+![macos](https://img.shields.io/badge/to_be_tested_on_MacOS-f31f1f?logo=apple&logoColor=fff)
 ![linux](https://img.shields.io/badge/works_on_Linux%2FWSL-1476ff?logo=linux&logoColor=fff)
 
 this is the repository reponsible for a one-stop download of scripts designated to efficiently download your VStream VODs!!
@@ -11,9 +11,20 @@ this repository has been provisioned as the VStream backend has no direct implem
 ## table of contents
 
 1. [important information](#important-information)
-2. [installing dependencies](#installing-dependencies)
-3. [downloading VStream VODs](#downloading-vstream-vods)
-4. [MD5 hashes](#md5-hashes)
+    - [what this repository contains](#what-this-repository-contains)
+    - [dependencies](#dependencies)
+    - [brace terminologies](#brace-terminologies)
+2. [installation](#installation)
+    - [installing on Windows](#installing-on-windows)
+    - [installing on MacOS](#installing-on-macos)
+    - [installing on Linux](#installing-on-linux)
+3. [instantiating the working directory](#instantiating-the-working-directory)
+4. [downloading VStream VODs](#downloading-vstream-vods)
+    - [supplementary notes for WSL](#supplementary-notes-for-wsl)
+5. [tutorial video](#tutorial-video)
+6. [FAQ](#faq)
+7. [file checksums](#file-checksums)
+    - [verifying file checksums](#verifying-file-checksums)
 
 # important information
 
@@ -23,8 +34,8 @@ some things you need to know about this repository.
 
 we've provided the scripts that works on their designated operating systems:
 
-- `.sh` applies to Linux/Unix, and WSL (Windows Subsystem for Linux) commandline operations.
-- `.bat` covers the Windows commandline operations.
+- `.sh` applies to all UNIX Shell commandline, including MacOS and WSL (Windows Subsystem for Linux).
+- `.bat` applies only to Windows commandline.
 
 ## dependencies
 
@@ -32,68 +43,320 @@ the scripts depend on the following:
 
 - `yt-dlp` for download operations
 - `ffmpeg` for video processing and conversion
+- `python3` for framework behind the app
 
-refer to the section below on how to download these dependencies.
+refer to the next main section below on how to download these dependencies.
 
-# installing dependencies
+## brace terminologies
+
+- `{WORKDIR}` - your working directory.
+- `{LATESTVERSION}` - latest version of `yt-dlp` on GitHub. recommended to address the latest fixes.
+- `{PACKAGENAME}` - a package name to be installed to your system. mainly for UNIX shell package manager operations.
+- `{PACKAGEFILE}` - the file of the package to be installed. in this documentation, it will be used for RHEL local installs.
+- `{PACKAGEWEBFILE}` - package file that came from the internet. application same as above.
+- `{EXECUTABLE}` - the app name to be executed in the commandline.
+- `{YOURCHANNEL}` - your VStream channel username.
+- `{FILENAME}` - specify a name to appear in your working directory.
+- `{PCNAME}` - your PC's hostname. only applies to Windows.
+- `{USERNAME}` - your user account's non-changeable username. mainly applies to WSL with the [supplementary notes](#supplementary-notes-for-wsl).
+- `{OUTPUTDIR}` - an output directory to export your MP4 file. only applies to WSL.
+
+# installation
 
 installing these dependencies require that you know which operating system you're using.
 
 ## installing on Windows
 
-- download the following [ZIP file](https://cdn.discordapp.com/attachments/1133239175609581638/1143432856455090186/yt-dlp.zip) and put it in any directory you want. be minded that the `yt-dlp` directory will be the working directory moving forward.
-  - for file integrity purposes, the ZIP's MD5 hash is `00322b37e9a398e8fe14172c583f7b60`. on Windows, you can re-verify the integrity by executing `certutil -hashfile yt-dlp.zip MD5` in Command Prompt.
-- alternatively, you can download `yt-dlp` from the [Releases](https://github.com/yt-dlp/yt-dlp/releases) screen, and `ffmpeg Essentials` from [gyan.dev](https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-essentials.7z). you will only need the `ffmpeg.exe` file for this operation.
-  - ensure that there is a workspace directory provisioned beforehand, and that the program files MUST be placed in the `app` directory.
+you have two options:
 
-## installing on Linux/WSL (Debian-based, more to come)
+### ZIP file option
 
-- prepare a working directory to place your VODs. do `cd {DIRECTORY}` to begin preparation.
-- if you're installing the app from `apt`:
-  - `sudo apt-get update` to update the repository files. you will need to enter your password if you have one.
-  - `sudo apt-get -y install yt-dlp ffmpeg` to install the app and its dependency.
-- if you're installing the app directly from the repository:
-  - `wget https://github.com/yt-dlp/yt-dlp/releases/download/{LATESTVERSION}/yt-dlp` where `{LATESTVERSION}` refers to the latest release. for more info, check out the yt-dlp repository on GitHub.
-  - `sudo apt-get update && sudo apt-get -y install ffmpeg` to install its dependency.
-  - `chmod +x yt-dlp` to make the app executable.
+you can download the following [ZIP file](https://cdn.discordapp.com/attachments/1133239175609581638/1143432856455090186/yt-dlp.zip) and place it in any directory you want. note that this will be your working directory moving forward.
+
+- for file integrity purposes, the ZIP's MD5 hash is `00322b37e9a398e8fe14172c583f7b60`.
+- note that this requires Python to be installed beforehand. visit the [download page](https://python.org/downloads/windows) to download the latest version.
+
+### GitHub Releases option (Windows)
+
+download the latest `yt-dlp_win.zip` from the [Releases](https://github.com/yt-dlp/yt-dlp/releases) screen, and `ffmpeg Essentials` from [gyan.dev](https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-essentials.7z). you will only need the `ffmpeg.exe` file for this operation.
+
+- extract the ZIP contents to the `{WORKDIR}\app` directory, along with `ffmpeg.exe`.
+- note that you won't need to install Python, as the frameworks are already in the app.
+
+## installing on MacOS
+
+_note that this section might need further validation as I personally don't have a Mac to test this with. if you have one and are willing to test this out, reach out to me on VStream [Discord](https://discord.gg/vstream) -- just mention **@thebelovedmoon**._
+
+### `homebrew` option
+
+1. set up `homebrew` first. go to [brew.sh](https://brew.sh) to install the package manager.
+    - afterwards, you can install the packages using `brew install {PACKAGENAME}`.
+2. install `yt-dlp`, `ffmpeg` and `python3` at the same time, and wait for the process to finish.
+
+### GitHub Releases option (MacOS)
+
+1. download the latest `yt-dlp_macos.zip` from the [Releases](https://github.com/yt-dlp/yt-dlp/releases). extract the files to `{WORKDIR}/app`.
+2. download `ffmpeg` for MacOS from [evermeet.cx](https://evermeet.cx/ffmpeg), and follow the instructions. alternatively, you can install `ffmpeg` using `homebrew`.
+    - just like on Windows, Python files are already included in the ZIP so you don't have to install the package itself.
+
+## installing on Linux
+
+there are multiple ways to install and operate on multiple Linux/UNIX distributions. refer to the following below:
+
+1. [Debian](#debian-based)
+2. [Arch](#arch-based)
+3. [RHEL](#rhel-based)
+4. [supplementary notes](#supplementary-notes-for-installation)
+
+### Debian-based
+
+most distributions and derivatives rely on the Debian framework as it's user-friendly and intuitive at best. above all, they mainly use `apt` as their package manager. _in this context, I'll be showing you the steps as I've tested them on a Debian-based (mainly Ubuntu-based) environment._
+
+you have two ways to obtain the dependencies:
+
+#### `apt-get` option
+
+1. launch the command shell either by launching from the Apps section, or pressing `Ctrl-Alt-T`.
+    - in GNOME, they are called Terminal; while in KDE, they are called Konsole. app names vary by their display managers.
+2. launch the following command: `sudo apt-get update && sudo apt-get -y install yt-dlp ffmpeg python3`.
+    - as you're in `sudo` mode, enter your account password to continue.
+3. wait for the installation to finish, and prepare your `{WORKDIR}`.
+
+#### GitHub Releases option (Linux Debian)
+
+1. launch the command shell either by launching from the Apps section, or pressing `Ctrl-Alt-T`.
+2. prepare `{WORKDIR}`, and create the folder `app` inside it.
+3. download the latest release with `wget https://github.com/yt-dlp/yt-dlp/releases/download/{LATESTVERSION}/yt-dlp_linux.zip`. wait for the download to finish.
+    - for more information, refer to the section [GitHub Releases for Windows](#github-releases-option-windows).
+    - if you don't have `wget` beforehand, install it via `sudo apt-get -y install wget`.
+    - to check if `wget` is installed, do `wget --version`.
+4. `unzip` the file with the command `unzip yt-dlp_linux.zip -d {WORKDIR}/app/`. if you wish, you can delete the ZIP file afterwards.
+    - if you don't have the program, install it with `sudo apt-get -y install unzip`.
+5. install `ffmpeg` with the command `sudo apt-get -y install ffmpeg`.
+    - I usually don't require installing `python3` since you already have the necessary files needed to operate, but if you want, you can install it alongside `ffmpeg`.
+
+### Arch-based
+
+Arch Linux and its derivatives utilize the `pacman` as their package manager. (not to be confused with Pac-man, a hit arcade game.) Arch Linux natively doesn't have a window manager, but it will be the same as everything else. however, I do recommend to install a window manager before proceeding with the installation. check out this [documentation](https://wiki.archlinux.org/title/window_manager) by Arch Linux or this [video](https://youtu.be/_JYIAaLrwcY) by SomeOrdinaryGamers.
+
+once you're done, you can follow either these options below:
+
+#### `pacman` option
+
+1. launch the command shell.
+2. install the dependencies using `sudo pacman -S {PACKAGENAME}`. wait for the installation to finish.
+3. prepare your `{WORKDIR}`.
+
+#### GitHub Releases option (Linux Arch)
+
+steps intended for this section is the same as the [Debian](#github-releases-option-linux-debian) side, just note the following:
+
+- replace `apt-get -y install` with `pacman -S`.
+- ensure that you have `wget` installed beforehand, as in some cases it's not installed by default.
+  - do `wget --version` to determine if the package is installed.
+
+### RHEL-based
+
+nowadays, RHEL and its derivatives mainly utilize `dnf` as its package manager, although one can also use `yum`. with this, you'll have many options regarding this section.
+
+_some of the steps here are still untested as I don't have experience with RHEL yet. will update this documentation with proper steps if necessary._
+
+before tackling one of these steps below, make sure that you have provisioned a `{WORKDIR}` beforehand.
+
+#### `dnf` option
+
+1. launch the commandline utility.
+2. execute `sudo dnf -y install yt-dlp ffmpeg python3`.
+3. wait for the installaion to finish.
+
+if one of the packages can't be found, skip this whole section and proceed to the next.
+
+refer to the following [documentation](https://redhat.com/sysadmin/install-software-packages-rhel) on the basic steps for installing packages via this platform.
+
+#### `yum` option
+
+1. launch the commandline utility.
+2. execute `sudo yum -y install yt-dlp ffmpeg python3`.
+3. wait for the installaion to finish.
+
+if one of the packages can't be found, skip this whole section and proceed to the next.
+
+check out this [cheatsheet](https://access.redhat.com/articles/yum-cheat-sheet) to learn more about this platform.
+
+#### `rpm` option
+
+sometimes, when all else fails, you'll just need to do the `rpm` option as most packages published to RHEL are displayed in this format. for this, we'll need either `dnf` or `yum`.
+
+to install the rpm packages locally, download them first from your browser, or use `wget` to fetch the files. once that's done, execute either:
+
+- `sudo dnf -y install {PACKAGEFILE}`, or
+- `sudo yum -y localinstall {PACKAGEFILE}`.
+  - alternatively, you can use `sudo yum -y localinstall {PACKAGEWEBFILE}` to install the package without the need of `wget`, but the latter will come in handy later.
+
+here are the repositories, courtesy of rpmfind:
+
+- [`wget`](http://www.rpmfind.net/linux/rpm2html/search.php?query=wget)
+- [`yt-dlp`](https://rpmfind.net/linux/rpm2html/search.php?query=yt-dlp)
+- [`ffmpeg`](https://rpmfind.net/linux/rpm2html/search.php?query=ffmpeg)
+- [`python3`](https://rpmfind.net/linux/rpm2html/search.php?query=python3)
+
+#### GitHub Release option (Linux RHEL)
+
+same as the [Debian](#github-releases-option-linux-debian) and [Arch](#github-releases-option-linux-arch) options, but note the following:
+
+- ensure that you have `wget` installed beforehand.
+- `python3` is not required, so you'll just need `ffmpeg` to continue with the operation.
+
+### supplementary notes for installation
+
+#### regarding the binaries from GitHub
+
+although I recommend that the GitHub Release will be at the latest vesion, you can only download it **once**. that is because embedded within the app is a self-service mechanism that detects if there is the latest version available. depending on where you obtained the app, most instances only require that you update through `yt-dlp -U`.
+
+however, in some cases, Debian-based distributions will prevent you from updating through the self-update mechanism if you installed them through `apt`. in that case, follow the instructions to allow updating the app.
+
+#### regarding WSL (Windows Subsystem for Linux)
+
+starting with Windows 10 1903 (x64) or 2004 (ARM), you can take advantage of **Windows Subsystem for Linux** without switching OSes or PCs!! most operations involved in this main section will also work with WSL -- it will only depend on what distribution you're using. for an overview of this new platform, visit this [article](https://learn.microsoft.com/en-us/windows/wsl/about) from Microsoft Docs.
+
+#### regarding other package managers
+
+if you feel that you're comfortable with other package managers regardless of distribution or environment, then google the name of your package manager for details and how to install packages.
+
+however, ensure that your package manager has `yt-dlp` so that you can efficiently work on your options. want to chip in? [contribute](https://github.com/thebelovedmoon/vstream-vod-download/fork) to this repository and send a pull request regarding your package manager of choice!! I'm always happy to accept your requests^^~
+
+#### regarding `snapd`
+
+you can also install 
+
+# instantiating the working directory
+
+before you can proceed to the next step, ensure that `git` is installed if you're working from a commandline. otherwise, consider the following steps below:
+
+## fetching this repository with `git`
+
+if you don't have `git` installed, follow the instructions over at [installation](#installation). RPMs for this utility (RHEL only) are sourced [here](https://rpmfind.net/linux/rpm2html/search.php?query=git).
+
+1. on your commandline utility, do `git clone https://github.com/thebelovedmoon/vstream-vod-download.git`.
+2. once it finishes downloading, go to the `vstream-vod-download` directory. depending on your distribution, copy the shell to where your `{WORKDIR}` is located.
+
+## fetching this repository without `git`
+
+fetching the repository without the need of `git`? you can either interact from a browser or use `wget` from the commandline.
+
+### the browser (GUI) option
+
+1. go to `https://github.com/thebelovedmoon/vstream-vod-download` on your preferred browser.
+2. click the green button labeled `Code`, then click `Download ZIP`.
+    - it will display as `vstream-vod-download-clonethis.zip` due to GitHub's naming mechanism.
+3. when it's done downloading, unzip the file to any location (recommended is close to your `{WORKDIR}`).
+4. go to your extracted directory, pick a file that suits your distribution, then copy to `{WORKDIR}`.
+
+### the `wget` option
+
+1. on a commandline, do `wget https://github.com/thebelovedmoon/vstream-vod-download/archive/refs/heads/clonethis.zip`.
+2. when it finishes, unzip the file using `unzip clonethis.zip`.
+    - the folder will show up as `vstream-vod-download-clonethis` due to GitHub's naming mechanism.
+    - if you don't have `unzip`, install it using the steps outlined in [installation](#installation) section. RPMs for this utility (RHEL only) are sourced [here](https://rpmfind.net/linux/rpm2html/search.php?query=unzip).
+3. go to your extracted directory, and list the files using either `ls` (UNIX) or `dir` (Windows).
+4. choose a file which suits your distribution, and copy to `{WORKDIR}`.
 
 # downloading VStream VODs
 
-once you're done with the steps above, it's time for the main event: downloading your VODs!! follow the steps below:
+**[now we're getting to the exciting part](https://youtu.be/p5dbCoei7LU&t=27s): downloading the VODs**!! most instructions shown here apply to all OSes, but be minded that depending on the instructions you follow in the [installation](#installation) section, you'll only be working in your `{WORKDIR}`.
 
-- find an executable from this repository that is suited for your operating system, and download the file of your choice to the `{DIRECTORY}` working directory.
-  - alternatively, use `git clone https://github.com/thebelovedmoon/vstream-vod-download.git` in another directory, and copy your file of choice to the `{DIRECTORY}` working directory.
-- (for Linux/WSL only) `chmod +x {EXECUTABLE}` to make the script executable. `{EXECUTABLE}` refers to the file you recently downloaded/copied.
-- execute the program.
-  - for Windows or Linux with GUI, double-click on the executable.
-  - alternatively, in your working directory:
-    - for Windows, type the name of the executable. for added context, suffix with `.bat` at the end of the query.
-    - for Linux/WSL, prefix `./` before typing your executable.
-- follow the instructions.
-  - go to your channel at `https://vstream.com/c/@{YOURCHANNEL}`, and copy the URL to your VOD. paste it on the commandline by right-clicking, `Ctrl-V` (for Windows), or `Ctrl-Shift-V` (for Linux/WSL).
-  - specify a name for your downloaded VOD. output filename will be rendered as `vstream_{FILENAME}`.
-  - sit back and relax. depending on your internet connection and CPU speed, `yt-dlp` will go through the process of updating and downloading the video, and `ffmpeg` will take care of the conversion from MKV to MP4.
-    - if you're experiencing slow network speeds, terminate the operation by `Ctrl-C` or `Ctrl-Z`, delete the PART file with `del /s *.part` (Windows) or `rm -rf *.part` (Linux/WSL), and try again from bullet 3.
-- after all the operations are completed, view the outputted file.
+1. switch to `{WORKDIR}` on your commandline. you can do it in two ways:
+    - within the commandline, find your `{WORKDIR}` using either `ls` (UNIX) or `dir` (Windows), then `cd` to it.
+    - within your GUI, look for your `{WORKDIR}`, then launch your commandline utility within that folder.
+2. (for UNIX only!! for Windows, skip to step 3.) ensure that your script is executable, as they aren't by default. to do this, execute `chmod +x {EXECUTABLE}`.
+3. with the script inside your root directory, execute the `{EXECUTABLE}` file.
+    - for Windows commandline, just launch by typing the filename. for added confidence and security, append it with `.bat`.
+    - for UNIX commandline, prefix your script with `./`. otherwise, prefix with `/bin/sh` and a space.
+4. follow the on-screen instructions.
+    - it will ask for your VStream VOD url first. go to your channel at `https://vstream.com/c/{YOURCHANNEL}` and copy the url of your VOD. then paste it to the first question with either `Ctrl-V` (for Windows Command Prompt) or `Ctrl-Shift-V` (for UNIX or Windows Terminal).
+    - it will ask for your filename next. type in your preferred name before pressing `Enter`. due to the nature the scripts are constructed, it will be rendered as `vstream_{FILENAME}`.
+5. sit back and relax. depending on your internet connection, this may take a while depending on the length of your VOD.
+    - `yt-dlp` will begin fetching `m3u8`s that make up the fragments of your VOD. after all the fragments have finished with respect to your VOD length, it will compile them altogether render your file as MKV.
+    - `ffmpeg` then kicks in, remuxing your MKV file. like on the previous instance, elapsed time is dependent on your video length. when it's done, it will write to disk as MP4.
+    - in order to avoid duplication and confusion, the delete utility (`rm -rf` for UNIX, `del /s` for Windows) takes care of deleting the MKV file, leaving you with an MP4 file ready to view.
+    - **if in case your download hangs in the middle of downloading in `yt-dlp`: do `Ctrl-C`, `Ctrl-Z`, or close the window; then try again from step 3. don't forget to delete the `.part` file before trying again.**
+6. when the download and conversion is done, view the output file using your default video player.
 
-## supplementary notes for users running WSL
+## supplementary notes for WSL
 
-if you did this steps over on WSL (Windows Subsystem for Linux), you can also use the following instructions below:
+if you've downloaded the VOD through WSL (Windows Subsystem for Linux), don't worry -- these steps will help you in moving to your Windows directory:
 
-- in your working directory, do `mv *.mp4 /mnt/c/Users/{USERNAME}/{OUTPUTDIR}/`, where `{USERNAME}` refers to your current username, and `{OUTPUTDIR}` refers to your export directory.
-  - to find out what your username is, launch `cmd` and type `whoami`. it will display your PC name and your username as `{PCNAME}\{USERNAME}`.
-  - don't forget the last slash `/` as without it will cause your VOD to render as a single file, and overwrite if there are multiple files. this is caused when there are no existing directory in its parent. if you don't want the backslash, ensure that the intended directory is prepared beforehand.
+1. in your `{WORKDIR}` containing the outputted MP4 file, do `mv *.mp4 /mnt/c/users/{USERNAME}/{OUTPUTDIR}/`.
+    - to determine what your account username is, on `cmd.exe`, do `whoami`. it will display your PC name and account username as `{PCNAME}\{USERNAME}`.
+    - be minded about the slash `/` at the end as without it will cause your VOD to render as a single non-extension file. if you have multiple VODs in one directory, it will overwrite them.
+      - this is caused when there are no existing directory in its parent. if you don't want the slash symbol, ensure that `{OUTPUTDIR}` is provisioned beforehand.
+2. view the output file using your default video player.
 
-## tutorial video
+# tutorial video
 
 _below is a sample video that will be replaced when the tutorial video is published._
 
 [![](https://i.ytimg.com/vi/MNCjEx_yhCU/hq720.jpg)](https://youtu.be/MNCjEx_yhCU)
 
-# MD5 hashes
+if you did the instructions via this documentation or the tutorial video, then congrats!!:tada: you have successfully downloaded a VStream VOD and now you can upload it elsewhere at your own convenience!!
 
-the MD5 hashes are provided for file integrity purposes to prevent you from downloading malware. for more info, check out these articles from [Autodesk](https://autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Checking-the-MD5-checksum-of-a-Downloaded-File.html) and [La De Du](https://ladedu.com/how-to-verify-a-md5-or-sha-checksum-on-windows-10).
+# FAQ
 
-- `dl-vstream-apt.sh`: `e4715cd41b8f6793d7b4167355bc25e8`
-- `dl-vstream-selfupdate.sh`: `08ae25308df725bb0dcff927fd0dbf14`
-- `dl-vstream.bat`: `0480656fb227bfee49f5ba02b0bc797a`
+here are some frequently-asked questions that might answer your common issues. for more assistance, dm me on Discord at **@thebelovedmoon**!!
+
+**Q:** slow download has been detected, and sometimes it hangs in the middle of the download. <br>
+**A:** as per [downloading VStream VODs](#downloading-vstream-vods), interrupt the operation, delete the `.part` file, and try again.
+
+**Q:** download seems to be freezing on Windows, yet is working on other environments. <br>
+**A:** if your download doesn't work, switch to a different environment. but if you still want to stick with Windows, then ensure that the WSL is installed along with your preferred distrubution. see [regarding WSL](#regarding-wsl-windows-subsystem-for-linux) for info.
+
+**Q:** can you test for other distributions not included in this distribution? <br>
+**A:** I can, but it'll take time and effort to make this work. if you can, refer to [regarding other package managers](#regarding-other-package-managers) and send a pull request!!
+
+**Q:** there's too many `.sh` files!! which one should I choose? <br>
+**A:** `.sh` files are distinguished according to their package manager option. to determine which file to choose:
+
+- `arch` regards to Arch-based distributions. they utilize the `pacman` package manager.
+- `debian` regards to Debian-based distributions. they utilize the `apt` package manager.
+- `macos` regards to the MacOS platform. primarily, this utilizes the `brew` package manager. see [installing on MacOS](#installing-on-macos) for info.
+- `snap` regards to Linux platforms utilizing the `snapd` package manager. use your default package manager to install `snapd`.
+- `unix` regards to Linux platforms utilizing the [GitHub Releases option](#github-releases-option-linux-debian), requiring the binaries to be downloaded and extracted beforehand.
+
+**Q:** what does the MD5 and SHA256 hashfiles mean? <br>
+**A:** these hashfiles determine the authenticity of the files to avoid downloading any potential malware. as a precaution, **execute the commands at your own risk!!** some of them are still yet to be tested and results may vary.
+
+**Q:** how can I reach you for any inquiries? <br>
+**A:** you can shoot me a dm on Discord at **@thebelovedmoon**, mention me on [**VStream Discord**](https://discord.gg/vstream), or send me an [**email**](mailto:jelsa14018@gmail.com)!!
+
+# file checksums
+
+_updated 25 Aug 2023_
+
+these signatures are provided in `MD5` and `SHA256` to ensure that your files are safe to download.
+
+| file                           | md5                                      | sha256                                                                   |
+|--------------------------------|------------------------------------------|--------------------------------------------------------------------------|
+| `dl-vstream-arch.sh`           | `c63162d0224460968b8f965562b8ef4d`       | `3bf79864b9daa0883ff68a5741cab5538c5687a1b2904ef01e49ddf60a2c8fe0`       |
+| `dl-vstream-debian.sh`         | `64dd233fb547ee0979b9461a1503b2a1`       | `1d44a4d1659f5aaaa5d60124ce5a71ee8680b34285b7d83b8a3e520a2b860645`       |
+| `dl-vstream-macos.sh`          | `64db5d140973f6e5f7f935c1e9b9baae`       | `ecbcf2db4c09b9a9b6b0c117e5b049e5777cb71aa47aab4d240e5b02b305db75`       |
+| `dl-vstream-snap.sh`           | `ba8931513517fd410896564464f5c65c`       | `a7335ae9da4cf85418a3f6fc3dd5d0c71bd778ecdb9270a40dac873012d98425`       |
+| `dl-vstream-unix.sh`           | `31a6f607a774ab0c14b75342d65f9438`       | `50532ed0bb4ef5745a7c5195b77d1328437e0b852be356cd1f98f235b9fb51e2`       |
+| `dl-vstream-windows.bat`       | `0480656fb227bfee49f5ba02b0bc797a`       | `e626aed35a1f8c39e63568b5439613540a89d126467a19f41c74eb2862b4d157`       |
+
+## verifying file checksums
+
+for this, you'll need a text editor and a commandline utility. and make sure to copy-paste what hashfiles were displayed above before performing this commandline operation.
+
+### Windows
+
+1. `cd` to the folder which contains the files you cloned beforehand.
+    - for a quicker approach, open the folder which contains the files in File Explorer, press `F4` to open the address bar, `Ctrl-A` to select all the strings, type `cmd` then press `Enter`.
+2. do `certutil -hashfile {EXECUTABLE} md5` to output its MD5 hash. repeat the same process but replacing `md5` with `sha256`.
+3. copy-paste what was outputted in the commandline to your text editor, and do a visual inspection of them. if you find any inconsistency, clean the folder and re-clone the repository.
+
+### UNIX (MacOS, Linux and/or WSL)
+
+1. `cd` to the folder which contains the files you cloned beforehand.
+    - for a quicker approach, open the folder which the files in your display manager's File Manager, then right-click and select `Open Terminal`. in some display managers like KDE, press `Shift-F4` to open the commandline utility.
+2. do `md5sum {EXECUTABLE}`, then `sha256sum {EXECUTABLE}`.
+3. copy-paste what was outputted in the commandline to your text editor, and do a visual inspection of them. if you find any inconsistency, clean the folder and re-clone the repository. see [instantiating the working directory](#instantiating-the-working-directory) for more info.

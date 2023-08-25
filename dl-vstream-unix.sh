@@ -5,8 +5,8 @@ read -p "enter a file name to save to: " file
 
 echo
 echo "updating yt-dlp and downloading file. standby..."
-yt-dlp -U
-yt-dlp -o vstream_$file.mkv --downloader ffmpeg $url --verbose
+./app/yt-dlp_linux -U
+./app/yt-dlp_linux -o vstream_$file.mkv --downloader ffmpeg $url --verbose
 
 echo
 echo "converting file to MP4. standby..."

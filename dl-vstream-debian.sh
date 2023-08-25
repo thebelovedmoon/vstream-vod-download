@@ -6,7 +6,7 @@ read -p "enter a file name to save to: " file
 echo
 echo "updating yt-dlp and downloading file. standby..."
 sudo apt-get update
-sudo apt-get -y install yt-dlp
+sudo apt-get -y update yt-dlp
 sudo apt-get -y autoremove
 sudo apt-get clean
 sudo apt-get -y autoclean
