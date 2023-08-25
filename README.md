@@ -149,7 +149,7 @@ once you're done, you can follow either these options below:
 
 #### GitHub Releases option (Linux Arch)
 
-steps intended for this section is the same as the [Debian](#github-releases-option-linux-debian) side, just note the following:
+steps intended for this section are the same as the [Debian](#github-releases-option-linux-debian) side, just note the following:
 
 - replace `apt-get -y install` with `pacman -S`.
 - ensure that you have `wget` installed beforehand, as in some cases it's not installed by default.
@@ -202,7 +202,7 @@ here are the repositories, courtesy of rpmfind:
 
 #### GitHub Release option (Linux RHEL)
 
-same as the [Debian](#github-releases-option-linux-debian) and [Arch](#github-releases-option-linux-arch) options, but note the following:
+same as the [Debian](#github-releases-option-linux-debian) option, but note the following:
 
 - ensure that you have `wget` installed beforehand.
 - `python3` is not required, so you'll just need `ffmpeg` to continue with the operation.
