@@ -4,7 +4,7 @@
 ![macos](https://img.shields.io/badge/to_be_tested_on_MacOS-f31f1f?logo=apple&logoColor=fff)
 ![linux](https://img.shields.io/badge/works_on_Linux%2FWSL-1476ff?logo=linux&logoColor=fff)
 
-this is the repository reponsible for a one-stop download of scripts designated to efficiently download your VStream VODs!!
+this is the repository responsible for a one-stop download of scripts designated to efficiently download your VStream VODs!!
 
 this repository has been provisioned as the VStream backend has no direct implementation of downloading the VODs from the website yet.
 
@@ -71,9 +71,11 @@ you have two options:
 
 ### ZIP file option
 
-you can download the following [ZIP file](https://cdn.discordapp.com/attachments/1133239175609581638/1143432856455090186/yt-dlp.zip) and place it in any directory you want. note that this will be your working directory moving forward.
+you can download the following [ZIP file](https://cdn.discordapp.com/attachments/1133239175609581638/1143432856455090186/yt-dlp.zip) I provided and place it in any directory you want. note that this will be your working directory moving forward.
 
-- for file integrity purposes, the ZIP's MD5 hash is `00322b37e9a398e8fe14172c583f7b60`.
+- for file integrity purposes:
+  - MD5 hash is `00322b37e9a398e8fe14172c583f7b60`.
+  - SHA256 hash is `1d7d2f1fd5a4b488c7a72c12e6ab48fa09c37e2b01b763004ec93ac3f1d1aae7`.
 - note that this requires Python to be installed beforehand. visit the [download page](https://python.org/downloads/windows) to download the latest version.
 
 ### GitHub Releases option (Windows)
@@ -82,6 +84,8 @@ download the latest `yt-dlp_win.zip` from the [Releases](https://github.com/yt-d
 
 - extract the ZIP contents to the `{WORKDIR}\app` directory, along with `ffmpeg.exe`.
 - note that you won't need to install Python, as the frameworks are already in the app.
+
+working on a 32-bit (x86) PC? download `yt-dlp_x86.exe` from the Releases screen and move it to `{WORKDIR\app}`.
 
 ## installing on MacOS
 
@@ -322,6 +326,15 @@ here are some frequently-asked questions that might answer your common issues. f
 - `snap` regards to Linux platforms utilizing the `snapd` package manager. use your default package manager to install `snapd`.
 - `unix` regards to Linux platforms utilizing the [GitHub Releases option](#github-releases-option-linux-debian), requiring the binaries to be downloaded and extracted beforehand.
 
+**Q:** what about the `.bat` files? <br>
+**A:** as per [installing on Windows](#installing-on-windows) clause, they are provided assuming your work environment is on the Windows platform. there are two categories:
+
+- `full` means that you need the full ZIP from `yt-dlp` as outlined in the [GitHub Releases option](#github-releases-option-windows).
+- `min` means that you'll need just the ZIP I provided as outline in the [ZIP option](#zip-file-option).
+
+**Q:** can I change the name of `{WORKDIR}`? <br>
+**A:** you can!! just note that you can't rename the `app` directory as the script will fail to forward the arguments to.
+
 **Q:** what does the MD5 and SHA256 hashfiles mean? <br>
 **A:** these hashfiles determine the authenticity of the files to avoid downloading any potential malware. as a precaution, **execute the commands at your own risk!!** some of them are still yet to be tested and results may vary.
 
@@ -334,14 +347,15 @@ _updated 25 Aug 2023_
 
 these signatures are provided in `MD5` and `SHA256` to ensure that your files are safe to download.
 
-| file                           | md5                                      | sha256                                                                   |
-|--------------------------------|------------------------------------------|--------------------------------------------------------------------------|
-| `dl-vstream-arch.sh`           | `c63162d0224460968b8f965562b8ef4d`       | `3bf79864b9daa0883ff68a5741cab5538c5687a1b2904ef01e49ddf60a2c8fe0`       |
-| `dl-vstream-debian.sh`         | `64dd233fb547ee0979b9461a1503b2a1`       | `1d44a4d1659f5aaaa5d60124ce5a71ee8680b34285b7d83b8a3e520a2b860645`       |
-| `dl-vstream-macos.sh`          | `64db5d140973f6e5f7f935c1e9b9baae`       | `ecbcf2db4c09b9a9b6b0c117e5b049e5777cb71aa47aab4d240e5b02b305db75`       |
-| `dl-vstream-snap.sh`           | `ba8931513517fd410896564464f5c65c`       | `a7335ae9da4cf85418a3f6fc3dd5d0c71bd778ecdb9270a40dac873012d98425`       |
-| `dl-vstream-unix.sh`           | `31a6f607a774ab0c14b75342d65f9438`       | `50532ed0bb4ef5745a7c5195b77d1328437e0b852be356cd1f98f235b9fb51e2`       |
-| `dl-vstream-windows.bat`       | `0480656fb227bfee49f5ba02b0bc797a`       | `e626aed35a1f8c39e63568b5439613540a89d126467a19f41c74eb2862b4d157`       |
+| file                                | md5                                      | sha256                                                                   |
+|-------------------------------------|------------------------------------------|--------------------------------------------------------------------------|
+| `dl-vstream-arch.sh`                | `c63162d0224460968b8f965562b8ef4d`       | `3bf79864b9daa0883ff68a5741cab5538c5687a1b2904ef01e49ddf60a2c8fe0`       |
+| `dl-vstream-debian.sh`              | `64dd233fb547ee0979b9461a1503b2a1`       | `1d44a4d1659f5aaaa5d60124ce5a71ee8680b34285b7d83b8a3e520a2b860645`       |
+| `dl-vstream-macos.sh`               | `64db5d140973f6e5f7f935c1e9b9baae`       | `ecbcf2db4c09b9a9b6b0c117e5b049e5777cb71aa47aab4d240e5b02b305db75`       |
+| `dl-vstream-snap.sh`                | `ba8931513517fd410896564464f5c65c`       | `a7335ae9da4cf85418a3f6fc3dd5d0c71bd778ecdb9270a40dac873012d98425`       |
+| `dl-vstream-unix.sh`                | `31a6f607a774ab0c14b75342d65f9438`       | `50532ed0bb4ef5745a7c5195b77d1328437e0b852be356cd1f98f235b9fb51e2`       |
+| `dl-vstream-windows-full.bat`       | `37cad1c59771d908f674a3b469f22a97`       | `4c15d35d2d5ad291302ab7e842670ac6f3a2f8cad6f923497135b1c2cefc010c`       |
+| `dl-vstream-windows-min.bat`        | `0480656fb227bfee49f5ba02b0bc797a`       | `e626aed35a1f8c39e63568b5439613540a89d126467a19f41c74eb2862b4d157`       |
 
 ## verifying file checksums
 
