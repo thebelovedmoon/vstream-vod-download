@@ -231,7 +231,10 @@ however, ensure that your package manager has `yt-dlp` so that you can efficient
 
 #### regarding `snapd`
 
-you can also install 
+you can also install `yt-dlp` through `snapd`!! follow the steps below:
+
+1. if you don't have `snapd` installed, follow the steps aligned with your Linux distribution to install it.
+2. do `sudo snap install yt-dlp` and wait for the installation to finish.
 
 # instantiating the working directory
 
