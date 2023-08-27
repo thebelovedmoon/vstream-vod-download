@@ -353,7 +353,7 @@ these signatures are provided in `MD5` and `SHA256` to ensure that your files ar
 | file                                | md5                                      | sha256                                                                   |
 |-------------------------------------|------------------------------------------|--------------------------------------------------------------------------|
 | `dl-vstream-arch.sh`                | `c63162d0224460968b8f965562b8ef4d`       | `3bf79864b9daa0883ff68a5741cab5538c5687a1b2904ef01e49ddf60a2c8fe0`       |
-| `dl-vstream-debian.sh`              | `3ea3382edf2433ca8e1dc0ae3e48a4b4`       | `bd15f865533bb4ddf736fb17a14c97b2c1d0a696cbfa0153bcf377586c77ac8c`       |
+| `dl-vstream-debian.sh`              | `e4715cd41b8f6793d7b4167355bc25e8`       | `455748f4a54402806ce57d0ea059cbeb14ed1077bbfb7efb203e74e55a41770a`       |
 | `dl-vstream-macos.sh`               | `64db5d140973f6e5f7f935c1e9b9baae`       | `ecbcf2db4c09b9a9b6b0c117e5b049e5777cb71aa47aab4d240e5b02b305db75`       |
 | `dl-vstream-snap.sh`                | `ba8931513517fd410896564464f5c65c`       | `a7335ae9da4cf85418a3f6fc3dd5d0c71bd778ecdb9270a40dac873012d98425`       |
 | `dl-vstream-unix.sh`                | `31a6f607a774ab0c14b75342d65f9438`       | `50532ed0bb4ef5745a7c5195b77d1328437e0b852be356cd1f98f235b9fb51e2`       |
