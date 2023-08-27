@@ -301,9 +301,7 @@ if you've downloaded the VOD through WSL (Windows Subsystem for Linux), don't wo
 
 # tutorial video
 
-_below is a sample video that will be replaced when the tutorial video is published._
-
-[![](https://i.ytimg.com/vi/MNCjEx_yhCU/hq720.jpg)](https://youtu.be/MNCjEx_yhCU)
+[![](https://i.ytimg.com/vi/LotQD6lhUWQ/hq720.jpg)](https://youtu.be/LotQD6lhUWQ)
 
 if you did the instructions via this documentation or the tutorial video, then congrats!!:tada: you have successfully downloaded a VStream VOD and now you can upload it elsewhere at your own convenience!!
 
