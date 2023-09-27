@@ -10,15 +10,15 @@ sudo apt-get -y install yt-dlp
 sudo apt-get -y autoremove
 sudo apt-get clean
 sudo apt-get -y autoclean
-yt-dlp -o vstream_$file.mkv --downloader ffmpeg $url --verbose
+yt-dlp -o "vstream_$file.mkv" --downloader ffmpeg $url --verbose
 
 echo
 echo "converting file to MP4. standby..."
-ffmpeg -loglevel debug -i vstream_$file.mkv -codec copy vstream_$file.mp4
+ffmpeg -loglevel debug -i "vstream_$file.mkv" -codec copy "vstream_$file.mp4"
 
 echo
 echo "deleting MKV file. standby..."
-rm -rf vstream_$file.mkv
+rm -rf "vstream_$file.mkv"
 
 echo
 echo "download completed and converted successfully."

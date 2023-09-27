@@ -189,7 +189,7 @@ check out this [cheatsheet](https://access.redhat.com/articles/yum-cheat-sheet) 
 
 #### `rpm` option
 
-sometimes, when all else fails, you'll just need to do the `rpm` option as most packages published to RHEL are displayed in this format. for this, we'll need either `dnf` or `yum`.
+sometimes, when all else fails, you'll just need to do the `rpm` option as most RHEL packages are exported in this format. for this, we'll need either `dnf` or `yum`.
 
 to install the rpm packages locally, download them first from your browser, or use `wget` to fetch the files. once that's done, execute either:
 
@@ -242,10 +242,15 @@ before you can proceed to the next step, ensure that `git` is installed if you'r
 
 ## fetching this repository with `git`
 
-if you don't have `git` installed, follow the instructions over at [installation](#installation). RPMs for this utility (RHEL only) are sourced [here](https://rpmfind.net/linux/rpm2html/search.php?query=git).
+if you don't have `git` installed, follow the instructions over at [installation](#installation).
 
 1. on your commandline utility, do `git clone https://github.com/thebelovedmoon/vstream-vod-download.git`.
 2. once it finishes downloading, go to the `vstream-vod-download` directory. depending on your distribution, copy the shell to where your `{WORKDIR}` is located.
+
+### supplementary notes
+
+- installing `git` on Windows? refer [here](https://git-scm.com/downloads).
+- RPMs for this utility (RHEL only) are sourced [here](https://rpmfind.net/linux/rpm2html/search.php?query=git).
 
 ## fetching this repository without `git`
 
@@ -309,6 +314,14 @@ if you did the instructions via this documentation or the tutorial video, then c
 
 here are some frequently-asked questions that might answer your common issues. for more assistance, dm me on Discord at **@thebelovedmoon**!!
 
+**NEW** <br>
+**Q:** will this work on private videos? <br>
+**A:** as per VStream's policies and the way they handle VODs, you can only work on public and unlisted videos!! in the future, we might add more procedures (like OAuth) to allow you to download private VODs, but we'll leave it to VStream's backend for options.
+
+**NEW** <br>
+**Q:** my VOD won't fit on my storage device!! <br>
+**A:** keep in mind that we'll be downloading the highest quality VOD so that you can upload it anywhere with ease!! refer to the FORMAT SELECTON on [`yt-dlp`'s README](https://github.com/yt-dlp/yt-dlp#format-selection) for details. we recommend that your storage device of choice is no less than 4GB!! (tested on a 30-min 1080p30 VOD)
+
 **Q:** slow download has been detected, and sometimes it hangs in the middle of the download. <br>
 **A:** as per [downloading VStream VODs](#downloading-vstream-vods), interrupt the operation, delete the `.part` file, and try again.
 
@@ -344,19 +357,19 @@ here are some frequently-asked questions that might answer your common issues. f
 
 # file checksums
 
-_updated 25 Aug 2023_
+_updated 27 Sep 2023_
 
 these signatures are provided in `MD5` and `SHA256` to ensure that your files are safe to download.
 
 | file                                | md5                                      | sha256                                                                   |
 |-------------------------------------|------------------------------------------|--------------------------------------------------------------------------|
-| `dl-vstream-arch.sh`                | `c63162d0224460968b8f965562b8ef4d`       | `3bf79864b9daa0883ff68a5741cab5538c5687a1b2904ef01e49ddf60a2c8fe0`       |
-| `dl-vstream-debian.sh`              | `e4715cd41b8f6793d7b4167355bc25e8`       | `455748f4a54402806ce57d0ea059cbeb14ed1077bbfb7efb203e74e55a41770a`       |
-| `dl-vstream-macos.sh`               | `64db5d140973f6e5f7f935c1e9b9baae`       | `ecbcf2db4c09b9a9b6b0c117e5b049e5777cb71aa47aab4d240e5b02b305db75`       |
-| `dl-vstream-snap.sh`                | `ba8931513517fd410896564464f5c65c`       | `a7335ae9da4cf85418a3f6fc3dd5d0c71bd778ecdb9270a40dac873012d98425`       |
-| `dl-vstream-unix.sh`                | `31a6f607a774ab0c14b75342d65f9438`       | `50532ed0bb4ef5745a7c5195b77d1328437e0b852be356cd1f98f235b9fb51e2`       |
-| `dl-vstream-windows-full.bat`       | `37cad1c59771d908f674a3b469f22a97`       | `4c15d35d2d5ad291302ab7e842670ac6f3a2f8cad6f923497135b1c2cefc010c`       |
-| `dl-vstream-windows-min.bat`        | `0480656fb227bfee49f5ba02b0bc797a`       | `e626aed35a1f8c39e63568b5439613540a89d126467a19f41c74eb2862b4d157`       |
+| `dl-vstream-arch.sh`                | `2dd88022d792776e37893164078796f5`       | `0782b1786cc38e1691f8fce032665f02c0ff5df5d11458cafc6e64e5f3a8da9f`       |
+| `dl-vstream-debian.sh`              | `7fb4e89fe3edabc54cc467e7bb8372a5`       | `b21a976393885ac27da30c7792e0ad1b6b1ffa610ef9963e87341b1042fd874a`       |
+| `dl-vstream-macos.sh`               | `8bb8cc6cffd66b220e57caeee2bf9bc1`       | `68c0806767cf38f47a0a299c674ed4ef878616f188ba25c7d94f96f962a3ab1d`       |
+| `dl-vstream-snap.sh`                | `1fe0a372305b47610971c4dfe20c58ee`       | `d794ef02be549aa9373f26a3de1d461cad67137375e1e6ed7417f45c2b2fb6e4`       |
+| `dl-vstream-unix.sh`                | `4ebf16b2d53d218f9dfb02d22806da6c`       | `150d59b0599e69de662bc4dbe2512ee30102df465fa5adbd2c2ce48334873cd4`       |
+| `dl-vstream-windows-full.bat`       | `85686af1b92c0677b23938f1c2e80df6`       | `472ecb7b69ca59e144b1c2550b9181701789f57b1594f9cfd6c01227677d1176`       |
+| `dl-vstream-windows-min.bat`        | `bff2c6cfc03117945cf4974cf21105a6`       | `1f7193b4ad582c3ee5837792cb560274e2da18355819c5d7364718865056b374`       |
 
 ## verifying file checksums
 
